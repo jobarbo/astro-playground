@@ -1,0 +1,25 @@
+---
+import Navigation from "../components/Navigation.astro";
+
+const navigation_items = [
+	{href: "/", text: "Home"},
+	{href: "/about", text: "About"},
+	{href: "/about/team", text: "Team"},
+];
+
+const {title = "My Astro Site"} = Astro.props;
+---
+
+<html>
+	<head>
+		<title>{title}</title>
+	</head>
+	<body>
+		<header>
+			<Navigation navigation={navigation_items} />
+		</header>
+	</body>
+	<main>
+		<slot />
+	</main>
+</html>
