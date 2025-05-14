@@ -1,0 +1,44 @@
+---
+// get posts from WordPress REST API
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+interface WPPost {
+	id: number;
+	title: {
+		rendered: string;
+	};
+	excerpt: {
+		rendered: string;
+	};
+	link: string;
+}
+
+const getWpPosts = async () => {
+	const response = await fetch("https://eaddesign.ca/wp-json/wp/v2/pages?_embed&per_page=13");
+	const posts = (await response.json()) as WPPost[];
+	return posts;
+};
+
+const posts = await getWpPosts();
+console.log(posts);
+---
+
+<BaseLayout title='Team Page'>
+	<h1>Hello World - Team Pages</h1>
+
+	{
+		posts && posts.length > 0 ? (
+			<div class='posts'>
+				{posts.map((post: WPPost) => (
+					<article>
+						<h2>{post.title.rendered}</h2>
+						<div set:html={post.excerpt.rendered} />
+						<a href={post.link}>Read more</a>
+					</article>
+				))}
+			</div>
+		) : (
+			<p>No posts found</p>
+		)
+	}
+</BaseLayout>

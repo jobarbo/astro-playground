@@ -1,0 +1,17 @@
+@use "./_layout.scss";
+
+@mixin title-1 {
+	font-size: 2rem;
+	font-weight: bold;
+	color: rgb(21, 21, 53);
+	font-family: "Arial", sans-serif;
+	font-weight: 200;
+}
+
+body {
+	background-color: beige;
+}
+
+h1 {
+	@include title-1;
+}
