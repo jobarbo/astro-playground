@@ -2,7 +2,10 @@
 const {href} = Astro.props;
 ---
 
-<a href={href}><slot /></a>
+<a data-link href={href}>
+	<slot />
+	<span class='random-number'></span>
+</a>
 
 <style>
 	a {
@@ -11,4 +14,15 @@ const {href} = Astro.props;
 		font-size: 1.2rem;
 		font-family: sans-serif;
 	}
+	.random-number {
+		margin-left: 5px;
+		font-size: 0.9rem;
+		color: #666;
+	}
 </style>
+
+<script>
+	import {initLinks, randomNumber} from "../assets/javascript/link.js";
+
+	const {links} = initLinks();
+</script>

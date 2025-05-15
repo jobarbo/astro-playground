@@ -4,4 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title='Home Page'>
 	<h1>Hello World - Index Page</h1>
+	<p data-paragraph></p>
 </BaseLayout>
+
+<script>
+	import {initParagraph} from "../assets/javascript/home.js";
+
+	const {paragraph} = initParagraph();
+</script>
