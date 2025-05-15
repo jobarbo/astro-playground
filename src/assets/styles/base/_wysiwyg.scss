@@ -1,0 +1,107 @@
+@use "sass:map";
+@use "variables" as *;
+@use "typography" as *;
+@use "buttons" as *;
+
+/* Import your variables and mixins */
+
+body#tinymce {
+	@extend %base-text;
+	margin: 0 auto;
+	padding: 20px;
+	max-width: 800px;
+
+	// Use the wysiwyg mixin from _typography.scss
+	@include wysiwyg();
+
+	// Override specific styles for editor
+	a {
+		color: $black;
+		text-decoration: none;
+		transition: all map.get(map.get($button-config, transitions), default);
+
+		&:hover {
+			color: $black;
+		}
+	}
+
+	// Strong/Bold text - use the same weight as in _typography.scss
+	strong,
+	b {
+		font-weight: 800;
+	}
+
+	// Buttons
+	.button {
+		@include button();
+		margin: 1em 0;
+		display: inline-flex;
+	}
+
+	// Images
+	img {
+		max-width: 100%;
+		height: auto;
+		margin: 1em 0;
+	}
+
+	// Blockquotes
+	blockquote {
+		border-left: 3px solid $black;
+		padding-left: 1em;
+		margin: 1em 0;
+		font-style: italic;
+	}
+
+	// Tables
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1em 0;
+
+		th,
+		td {
+			border: 1px solid $black;
+			padding: 0.5em;
+		}
+
+		th {
+			background: $pearl;
+			font-weight: 700;
+		}
+	}
+
+	// Add WordPress specific classes for better alignment
+	.alignleft {
+		float: left;
+		margin: 0.5em 1em 0.5em 0;
+	}
+
+	.alignright {
+		float: right;
+		margin: 0.5em 0 0.5em 1em;
+	}
+
+	.aligncenter {
+		display: block;
+		margin: 0.5em auto;
+	}
+
+	// WordPress caption
+	.wp-caption {
+		max-width: 100%;
+
+		.wp-caption-text {
+			font-style: italic;
+			font-size: 14px;
+			margin-top: 0.5em;
+			color: $black;
+		}
+	}
+}
+
+// Add editor styles to match frontend
+.mce-content-body {
+	line-height: $line-height-default;
+	font-family: $font-family-default;
+}

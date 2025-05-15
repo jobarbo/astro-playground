@@ -1,0 +1,115 @@
+@use "sass:map";
+@use "variables" as *;
+@use "functions" as *;
+@use "mediaqueries" as *;
+
+/* –– GENERAL –– */
+* {
+	box-sizing: border-box;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.-hide {
+	display: none;
+}
+
+main {
+	padding-top: header-height("desktop", "full");
+	height: 100vh;
+	width: 100%;
+}
+
+#page {
+	overflow: hidden;
+	flex: 1; // Add this - makes the page fill remaining space
+	display: flex; // Add this if you want to continue the flex layout
+	flex-direction: column; // Add this if you want to continue the flex layout
+	/* 	padding-top: header-height("desktop", "full");
+
+	@media all and (max-width: 1024px) {
+		padding-top: header-height("tablet", "full");
+	}
+
+	@media all and (max-width: 720px) {
+		padding-top: header-height("mobile", "full");
+	} */
+}
+
+body {
+	min-width: 320px;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+	min-height: 100vh; // Add this
+	display: flex; // Add this
+	flex-direction: column; // Add this
+}
+
+body.-modal-opened {
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+}
+
+html.mobile {
+	body.-modal-opened {
+		overflow: hidden;
+		position: fixed;
+	}
+}
+
+.wrap {
+	width: 100%;
+	max-width: 1282px;
+	display: block;
+	margin: 0 auto;
+}
+
+#cookieWarning,
+noscript {
+	display: none;
+}
+
+img:not([src]) {
+	visibility: hidden;
+}
+
+%visuallyhidden,
+.visuallyhidden {
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	border: 0;
+
+	&.focusable:active,
+	&.focusable:focus {
+		width: auto;
+		height: auto;
+		margin: 0;
+		position: static;
+		overflow: visible;
+		clip: auto;
+	}
+}
+
+/* Make images easier to work with */
+img {
+	display: block;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+body.no-scroll {
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+	overflow: hidden;
+}

@@ -1,0 +1,76 @@
+@use "sass:map";
+@use "variables" as *;
+@use "utilities" as *;
+
+// ==========================================================================
+// Accessibility
+// ==========================================================================
+
+// Skip to main content link
+.skip-to-content {
+	@include visually-hidden;
+
+	&:focus {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: auto;
+		height: auto;
+		padding: 1rem;
+		margin: 1rem;
+		background-color: #fff;
+		color: #000;
+		text-decoration: none;
+		font-weight: 700;
+		clip: auto;
+		z-index: 1000;
+		outline: 3px solid #4d90fe;
+	}
+}
+
+// Focus visible - for keyboard users only
+.js-focus-visible :focus:not(.focus-visible) {
+	outline: none;
+}
+
+.js-focus-visible .focus-visible {
+	@include focus-outline;
+}
+
+// High contrast mode detection
+@media (forced-colors: active) {
+	// Add high contrast mode styles
+	.high-contrast-adjustment {
+		border: 1px solid currentColor;
+	}
+}
+
+// Reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+// Screen reader only text
+.sr-only {
+	@include visually-hidden;
+}
+
+// ARIA hidden helpers
+[aria-hidden="true"] {
+	display: none;
+}
+
+// Interactive element focus styles
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	@include focus-outline;
+}

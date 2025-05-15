@@ -4,8 +4,27 @@
 @use "functions" as *;
 @use "mediaqueries" as *;
 @use "typography" as *;
+@use "transitions" as *;
+@use "keyframes" as *;
+@use "buttons" as *;
+@use "container" as *;
+@use "forms" as *;
+@use "general" as *;
+@use "wysiwyg" as *;
+@use "utilities" as *;
+@use "accessibility" as *;
 
+// Forward all modules
 @forward "variables";
 @forward "functions";
 @forward "mediaqueries";
 @forward "typography";
+@forward "transitions";
+@forward "keyframes";
+@forward "buttons";
+@forward "container";
+@forward "forms";
+@forward "general";
+@forward "wysiwyg";
+@forward "utilities";
+@forward "accessibility";

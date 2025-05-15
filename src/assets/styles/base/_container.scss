@@ -1,0 +1,63 @@
+@use "sass:map";
+@use "sass:meta";
+@use "variables" as *;
+@use "functions" as *;
+@use "mediaqueries" as *;
+
+// ==========================================================================
+// MIXINS - Grid and Containers
+// ==========================================================================
+
+// Define a default max-width variable if it's not already defined elsewhere
+$max-width: 1200px !default;
+
+@mixin container(
+	$padding: (
+		xlarge: get-padding("xlarge"),
+		desktop: get-padding("desktop"),
+		tablet: get-padding("tablet"),
+		mobile: get-padding("mobile"),
+	),
+	$is-max-width: false
+) {
+	// Convert single value to map if needed
+	@if meta.type-of($padding) != "map" {
+		$padding: (
+			xlarge: $padding,
+			desktop: $padding,
+			tablet: $padding,
+			mobile: $padding,
+		);
+	}
+
+	// Base styles
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+
+	@if $is-max-width {
+		max-width: $max-width;
+	}
+
+	// Apply responsive padding
+	// Large desktops (default)
+	$desktop-value: map.get($padding, desktop);
+	padding: $desktop-value;
+
+	// Tablets
+	@media all and (max-width: map.get($breakpoints, tablet, full)) {
+		$tablet-value: map.get($padding, tablet);
+		padding: $tablet-value;
+	}
+
+	// Mobile
+	@media all and (max-width: 700px) {
+		$mobile-value: map.get($padding, mobile);
+		padding: $mobile-value;
+	}
+}
+
+// Container class
+.container {
+	@include container();
+}
