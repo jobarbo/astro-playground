@@ -1,0 +1,128 @@
+@use "sass:map";
+
+@forward "sass:map" as map*;
+
+// ==========================================================================
+//  VARIABLES
+// ==========================================================================
+
+// Colors
+// ==========================================================================
+$white: #fff;
+$ghost: #f3f3f3;
+$pearl: #f2efef;
+$alpine: #fdfbf5;
+$silver: #a0a0a0;
+$gray: #808080;
+$charcoal: #2d2d2d;
+$black: #000;
+$economy: #a2d4f4;
+$society: #6190ff;
+$environment: #8ce294;
+
+// UI colors
+$frost: #edf4f9;
+$navy: #0f2c3d;
+$lime: #8ce294;
+$sky: #a2d4f4;
+$cobalt: #6190ff;
+
+// Max width
+$design-width: 1920px;
+$design-width-stripped: 1920;
+$max-width: 1920px;
+$max-width-stripped: 1920;
+
+// Max height
+$design-height: 1080px;
+$design-height-stripped: 1080;
+$max-height: 1080px;
+$max-height-stripped: 1080;
+
+// Header Heights
+// ==========================================================================
+$header-heights: (
+	mobile: (
+		full: 80px,
+		stripped: 80,
+	),
+	tablet: (
+		full: 90px,
+		stripped: 90,
+	),
+	desktop: (
+		full: 90px,
+		stripped: 90,
+	),
+);
+
+// Transitions
+// ==========================================================================
+$transitions: (
+	short: 0.2s,
+	default: 0.3s ease-in-out,
+);
+
+// Breakpoints
+// ==========================================================================
+$breakpoints: (
+	tiny: (
+		full: 320px,
+		stripped: 320,
+	),
+	mobile: (
+		full: 720px,
+		stripped: 720,
+	),
+	tablet: (
+		full: 1024px,
+		stripped: 1024,
+	),
+	xlarge: (
+		full: 1920px,
+		stripped: 1920,
+	),
+);
+
+// Padding System with dynamic fluid calculations
+$base-paddings: (
+	base: 70px,
+	medium: 130px,
+	large: 175px,
+	xl: 200px,
+);
+$padding: (
+	mobile: (
+		base: calc(map.get($base-paddings, base) * 0.8),
+		medium: calc(map.get($base-paddings, medium) * 0.8),
+		large: calc(map.get($base-paddings, large) * 0.8),
+		xl: calc(map.get($base-paddings, xl) * 0.8),
+	),
+	tablet: (
+		base: calc(map.get($base-paddings, base) * 0.85),
+		medium: calc(map.get($base-paddings, medium) * 0.85),
+		large: calc(map.get($base-paddings, large) * 0.85),
+		xl: calc(map.get($base-paddings, xl) * 0.85),
+	),
+	desktop: (
+		base: map.get($base-paddings, base),
+		medium: map.get($base-paddings, medium),
+		large: map.get($base-paddings, large),
+		xl: map.get($base-paddings, xl),
+	),
+	xlarge: (
+		base: map.get($base-paddings, base),
+		medium: map.get($base-paddings, medium),
+		large: map.get($base-paddings, large),
+		xl: map.get($base-paddings, xl),
+	),
+);
+
+// Font & Typography
+// ==========================================================================
+$font-family-default: "Telegraph", Helvetica, Arial, sans-serif;
+$font-family-title: "Apercu", Helvetica, Arial, sans-serif;
+$function-size-default: 16;
+$font-size-default: 16px;
+$line-height-default: 1.8;
+$text-color-default: $black;

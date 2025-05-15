@@ -1,0 +1,506 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "variables" as *;
+@use "functions" as *;
+@use "mediaqueries" as *;
+
+// 0. mixins
+// ==========================================================================
+@mixin font-face($family, $path, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: $family;
+		src: url("#{$path}.eot?#iefix") format("embedded-opentype"), url("#{$path}.woff2") format("woff2"), url("#{$path}.woff") format("woff");
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+// 1. Variables
+// ==========================================================================
+
+@include font-face("Telegraph", "../fonts/PPTelegraf-Bold", 600, normal);
+@include font-face("Telegraph", "../fonts/PPTelegraf-Regular", 400, normal);
+@include font-face("Apercu", "../fonts/Apercu-Medium", 500, normal);
+
+// Font weight presets
+$font-weight: (
+	light: 300,
+	regular: 400,
+	medium: 500,
+	semibold: 600,
+	bold: 700,
+	extrabold: 800,
+);
+
+// 2. Title Configurations Map
+// ==========================================================================
+$titles: (
+	1: (
+		color: $navy,
+		size: 85,
+		font-family: $font-family-title,
+		weight: map.get($font-weight, medium),
+		line-height: 1.1,
+		letter-spacing: inherit,
+		text-transform: uppercase,
+		fs_min: calc(85 / 2),
+		fs_max: calc(85 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.75,
+			map.get($breakpoints, mobile, stripped): 0.5,
+			map.get($breakpoints, tiny, stripped): 0.5,
+		),
+	),
+	2: (
+		color: $navy,
+		size: 40,
+		font-family: $font-family-title,
+		weight: map.get($font-weight, medium),
+		line-height: 1,
+		letter-spacing: inherit,
+		text-transform: uppercase,
+		fs_min: calc(40 / 2),
+		fs_max: calc(40 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.75,
+			map.get($breakpoints, mobile, stripped): 0.55,
+			map.get($breakpoints, tiny, stripped): 0.5,
+		),
+	),
+	3: (
+		color: $black,
+		size: 32,
+		font-family: $font-family-default,
+		weight: map.get($font-weight, medium),
+		line-height: 1.5,
+		letter-spacing: inherit,
+		text-transform: none,
+		fs_min: calc(32 / 2),
+		fs_max: calc(32 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.75,
+			map.get($breakpoints, mobile, stripped): 0.65,
+			map.get($breakpoints, tiny, stripped): 0.5,
+		),
+	),
+	4: (
+		color: $black,
+		size: 25,
+		font-family: $font-family-default,
+		weight: map.get($font-weight, medium),
+		line-height: 1.5,
+		letter-spacing: inherit,
+		text-transform: none,
+		fs_min: calc(25 / 2),
+		fs_max: calc(25 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.8,
+			map.get($breakpoints, mobile, stripped): 0.7,
+			map.get($breakpoints, tiny, stripped): 0.65,
+		),
+	),
+	5: (
+		color: $black,
+		size: 18,
+		font-family: $font-family-default,
+		weight: map.get($font-weight, medium),
+		line-height: 2,
+		letter-spacing: inherit,
+		text-transform: none,
+		fs_min: calc(18 / 2),
+		fs_max: calc(18 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.9,
+			map.get($breakpoints, mobile, stripped): 0.7,
+			map.get($breakpoints, tiny, stripped): 0.65,
+		),
+	),
+	6: (
+		color: $black,
+		size: 16,
+		font-family: $font-family-default,
+		weight: map.get($font-weight, medium),
+		line-height: 2.25,
+		letter-spacing: inherit,
+		text-transform: none,
+		fs_min: calc(16 / 2),
+		fs_max: calc(16 * 2),
+		scale: (
+			map.get($breakpoints, tablet, stripped): 0.9,
+			map.get($breakpoints, mobile, stripped): 0.85,
+			map.get($breakpoints, tiny, stripped): 0.65,
+		),
+	),
+);
+
+// Default typography presets
+$text-presets: (
+	small: (
+		size: 14,
+		weight: map.get($font-weight, regular),
+		line-height: 1.2,
+		fs_min: calc(14 / 2),
+		fs_max: calc(14 * 2),
+	),
+	base: (
+		size: 16,
+		weight: map.get($font-weight, regular),
+		line-height: 1.2,
+		fs_min: calc(16 / 2),
+		fs_max: calc(16 * 2),
+	),
+	medium: (
+		size: 20,
+		weight: map.get($font-weight, regular),
+		line-height: 1.2,
+		fs_min: calc(20 / 2),
+		fs_max: calc(20 * 2),
+	),
+	large: (
+		size: 24,
+		weight: map.get($font-weight, regular),
+		line-height: 1.2,
+		fs_min: calc(24 / 2),
+		fs_max: calc(24 * 2),
+	),
+);
+
+@mixin title(
+	$level,
+	$color: null,
+	$fs_min: null,
+	$fs_max: null,
+	$fs: null,
+	$fw: null,
+	$lh: null,
+	$ls: null,
+	$tt: null,
+	$mt: 0,
+	$mb: 0,
+	$ta: null,
+	$mw: null,
+	$relative_fs: true,
+	$style: normal,
+	$variant: normal
+) {
+	$config: map.get($titles, $level);
+
+	$lh: if($lh, $lh, map.get($config, line-height));
+	$tt: if($tt, $tt, map.get($config, text-transform));
+	$ls: if($ls, $ls, map.get($config, letter-spacing));
+	// Determine the font size
+	$font-size: if($fs, $fs, map.get($config, size));
+
+	// determine the minimum and maximum font size
+	$fs_min: if($fs_min, $fs_min, map.get($config, fs_min));
+	$fs_max: if($fs_max, $fs_max, map.get($config, fs_max));
+
+	// Convert to vw if $relative_fs is true
+	@if $relative_fs {
+		@if ($mw != null) {
+			$mw: to-vw(strip-unit($mw));
+		}
+		$font-size: to-vw(strip-unit($font-size));
+	} @else {
+		$font-size: rem($font-size);
+	}
+
+	// Use the font shorthand property
+	@if $fs_min != null {
+		$font-size: clamp(#{$fs_min}px, #{$font-size}, #{$fs_max}px);
+	} @else {
+		$font-size: $font-size;
+	}
+	font: #{$style} #{$variant} (if($fw, $fw, map.get($config, weight))) $font-size $font-family-title;
+	line-height: $lh;
+	letter-spacing: $ls;
+	text-transform: $tt;
+	color: if($color, $color, map.get($config, color));
+	margin-top: if($mt, $mt, 0);
+	margin-bottom: if($mb, $mb, 0);
+	text-align: if($ta, $ta, null);
+	max-width: if($mw, $mw, null);
+
+	$scale: map.get($config, scale);
+	@each $breakpoint, $value in $scale {
+		@media all and (max-width: #{$breakpoint}px) {
+			@if meta.type-of($value) == "map" {
+				font-size: if(map.get($value, fixed), map.get($value, size), rem(map.get($value, size)));
+			} @else {
+				font-size: calc(#{rem(map.get($config, size))} * #{$value});
+			}
+		}
+	}
+
+	@media all and (max-width: 1024px) {
+		// make <br> not break the line
+		br {
+			display: none;
+		}
+	}
+}
+
+// Can be used with a preset name or with custom values
+@mixin text(
+	$preset: null,
+	$fs: null,
+	$fw: null,
+	$color: $text-color-default,
+	$lh: null,
+	$ls: 0em,
+	$ta: null,
+	$mb: 0,
+	$style: normal,
+	$variant: normal,
+	$mw: null,
+	$relative_fs: true,
+	$fs_min: null,
+	$fs_max: null
+) {
+	// Check if a preset was passed and use it as base
+	$config: null;
+	@if $preset != null and map.has-key($text-presets, $preset) {
+		$config: map.get($text-presets, $preset);
+	} @else {
+		// Default to base preset
+		$config: map.get($text-presets, base);
+	}
+
+	// Override preset with any custom values
+	$font-size: if($fs != null, $fs, map.get($config, size));
+	$font-weight: if($fw != null, $fw, map.get($config, weight));
+	$line-height: if($lh != null, $lh, map.get($config, line-height));
+	$min-size: if($fs_min != null, $fs_min, map.get($config, fs_min));
+	$max-size: if($fs_max != null, $fs_max, map.get($config, fs_max));
+
+	// Convert to vw if $relative_fs is true
+	@if $relative_fs {
+		@if ($mw != null) {
+			$mw: to-vw(strip-unit($mw));
+		}
+		$font-size: to-vw(strip-unit($font-size));
+	} @else {
+		$font-size: rem($font-size);
+	}
+	@if $min-size != null {
+		$font-size: clamp(#{$min-size}px, #{$font-size}, #{$max-size}px);
+	} @else {
+		$font-size: $font-size;
+	}
+
+	// Use the font shorthand property
+	font: #{$style} #{$variant} #{$font-weight} #{$font-size} $font-family-default;
+	line-height: $line-height;
+	letter-spacing: $ls;
+	color: $color;
+	text-align: $ta;
+	margin-bottom: $mb;
+	max-width: if($mw, $mw, null);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	@include tablet-only {
+		max-width: 100%;
+		font-size: 14px;
+	}
+	@include mobile-only {
+		font-size: 14px;
+	}
+}
+
+// 4. Base Typography Placeholders
+// ==========================================================================
+%base-text {
+	font-family: $font-family-default;
+	line-height: $line-height-default;
+	color: $text-color-default;
+	letter-spacing: 0em;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+%content-text {
+	@extend %base-text;
+	font-size: $font-size-default;
+	text-decoration: none;
+}
+
+// 5. Element Base Styles
+// ==========================================================================
+strong,
+p,
+a,
+li,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@extend %base-text;
+}
+
+p,
+a,
+li,
+span,
+div {
+	@extend %content-text;
+}
+
+h1 {
+	@include title(1);
+}
+
+h2 {
+	@include title(2);
+}
+
+h3 {
+	@include title(3);
+}
+
+h4 {
+	@include title(4);
+}
+
+h5 {
+	@include title(5);
+}
+
+h6 {
+	@include title(6);
+}
+
+// 6. Specific Element Styles
+// ==========================================================================
+a,
+button,
+.link {
+	opacity: 1;
+	transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+// 7. Generated Title Classes
+// ==========================================================================
+@for $i from 1 through 6 {
+	h#{$i},
+	.title-#{$i} {
+		@include title($i);
+	}
+}
+
+// 8. Utility Classes
+// ==========================================================================
+.paragraph,
+.link,
+.unordered-list,
+.ordered-list {
+	@include text($preset: base);
+}
+
+// Text size utility classes
+@each $name, $config in $text-presets {
+	.text-#{$name} {
+		@include text($preset: $name);
+	}
+}
+
+// Font weight utility classes
+@each $name, $weight in $font-weight {
+	.fw-#{$name} {
+		font-weight: $weight;
+	}
+}
+
+// Define a mixin for list styles
+@mixin list-styles($margin-bottom: 0.5em, $content: "— ", $margin-right: 0.5em, $preset: base, $fs: null, $fs_min: null, $fs_max: null) {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	li,
+	.list-item {
+		margin-bottom: $margin-bottom;
+		position: relative;
+		padding-left: 2em;
+		@if $fs != null {
+			@include text($fs: $fs, $fs_min: if($fs_min, $fs_min, 14), $fs_max: if($fs_max, $fs_max, $fs * 2));
+		} @else {
+			@include text($preset: $preset);
+		}
+		&::before {
+			content: $content;
+			margin-right: $margin-right;
+			position: absolute;
+			left: 0;
+		}
+	}
+}
+
+@mixin wysiwyg($color: $black) {
+	h1 {
+		@include title(1, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	h2 {
+		@include title(2, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	h3 {
+		@include title(3, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	h4 {
+		@include title(4, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	h5 {
+		@include title(5, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	h6 {
+		@include title(6, $color: $color, $mb: 1em, $mt: 1.25em);
+	}
+
+	p,
+	span {
+		@include text($preset: base, $color: $color, $mb: 2em);
+
+		@include tablet-only {
+			margin-bottom: 1em;
+		}
+	}
+
+	strong {
+		@include text($preset: base, $fw: map.get($font-weight, extrabold), $color: $color);
+	}
+
+	ul,
+	ol {
+		@include list-styles();
+		li {
+			@include text($preset: base, $color: $color, $mb: 0.5em);
+		}
+	}
+}
+
+// Use the mixin for unordered and ordered lists
+.unordered-list,
+.ordered-list {
+	@include list-styles();
+}
