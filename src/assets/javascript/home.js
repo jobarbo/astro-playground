@@ -4,6 +4,8 @@ export function initParagraph() {
 	if (paragraph) {
 		paragraph.textContent = generateRandomWord();
 	}
+
+	return {paragraph};
 }
 
 export function generateRandomWord() {
