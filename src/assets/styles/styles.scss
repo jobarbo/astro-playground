@@ -1,5 +1,5 @@
-@use "./_layout.scss" as *;
 @use "./base/base.scss" as *;
+@use "./layouts/base_layout.scss" as *;
 
 body {
 	background-color: $environment;

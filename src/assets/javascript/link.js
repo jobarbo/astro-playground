@@ -9,7 +9,6 @@ export function initLinks() {
 			span.textContent = `[${number}]`;
 		}
 		link.addEventListener("click", (e) => {
-			e.preventDefault();
 			console.log(link.href);
 		});
 	});

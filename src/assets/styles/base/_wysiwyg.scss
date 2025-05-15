@@ -6,10 +6,11 @@
 /* Import your variables and mixins */
 
 body#tinymce {
-	@extend %base-text;
 	margin: 0 auto;
 	padding: 20px;
 	max-width: 800px;
+
+	@extend %base-text;
 
 	// Use the wysiwyg mixin from _typography.scss
 	@include wysiwyg();
@@ -33,9 +34,9 @@ body#tinymce {
 
 	// Buttons
 	.button {
-		@include button();
 		margin: 1em 0;
 		display: inline-flex;
+		@include button();
 	}
 
 	// Images
