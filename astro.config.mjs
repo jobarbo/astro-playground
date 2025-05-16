@@ -8,7 +8,6 @@ export default defineConfig({
 	},
 	vite: {
 		build: {
-			cssCodeSplit: false, // Disable CSS code splitting
 			minify: true, // Enable minification for all assets
 		},
 	},

@@ -1,20 +1,5 @@
-@use "core/reset";
-@use "core/fonts";
-@use "variables" as *;
-@use "functions" as *;
-@use "mediaqueries" as *;
-@use "typography" as *;
-@use "transitions" as *;
-@use "keyframes" as *;
-@use "buttons" as *;
-@use "container" as *;
-@use "forms" as *;
-@use "general" as *;
-@use "wysiwyg" as *;
-@use "utilities" as *;
-@use "accessibility" as *;
-
-// Forward all modules
+@forward "core/reset";
+@forward "core/fonts";
 @forward "variables";
 @forward "functions";
 @forward "mediaqueries";
