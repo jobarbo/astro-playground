@@ -1,2 +1,5 @@
 @use "./base/base.scss" as *;
 @use "./layouts/base_layout.scss" as *;
+
+@forward "./base/base.scss";
+@forward "./layouts/base_layout.scss";
