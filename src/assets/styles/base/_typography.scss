@@ -15,6 +15,8 @@ $font-weight: (
 	extrabold: 800,
 );
 
+$title-multiplier: 2;
+$text-multiplier: 1.5;
 // 2. Title Configurations Map
 // ==========================================================================
 $titles: (
@@ -26,8 +28,8 @@ $titles: (
 		line-height: 1.1,
 		letter-spacing: inherit,
 		text-transform: uppercase,
-		fs_min: calc(85 / 2),
-		fs_max: calc(85 * 2),
+		fs_min: calc(85 / $title-multiplier),
+		fs_max: calc(85 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.75,
 			map.get($breakpoints, mobile, stripped): 0.5,
@@ -42,8 +44,8 @@ $titles: (
 		line-height: 1,
 		letter-spacing: inherit,
 		text-transform: uppercase,
-		fs_min: calc(40 / 2),
-		fs_max: calc(40 * 2),
+		fs_min: calc(40 / $title-multiplier),
+		fs_max: calc(40 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.75,
 			map.get($breakpoints, mobile, stripped): 0.55,
@@ -58,8 +60,8 @@ $titles: (
 		line-height: 1.5,
 		letter-spacing: inherit,
 		text-transform: none,
-		fs_min: calc(32 / 2),
-		fs_max: calc(32 * 2),
+		fs_min: calc(32 / $title-multiplier),
+		fs_max: calc(32 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.75,
 			map.get($breakpoints, mobile, stripped): 0.65,
@@ -74,8 +76,8 @@ $titles: (
 		line-height: 1.5,
 		letter-spacing: inherit,
 		text-transform: none,
-		fs_min: calc(25 / 2),
-		fs_max: calc(25 * 2),
+		fs_min: calc(25 / $title-multiplier),
+		fs_max: calc(25 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.8,
 			map.get($breakpoints, mobile, stripped): 0.7,
@@ -90,8 +92,8 @@ $titles: (
 		line-height: 2,
 		letter-spacing: inherit,
 		text-transform: none,
-		fs_min: calc(18 / 2),
-		fs_max: calc(18 * 2),
+		fs_min: calc(18 / $title-multiplier),
+		fs_max: calc(18 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.9,
 			map.get($breakpoints, mobile, stripped): 0.7,
@@ -106,8 +108,8 @@ $titles: (
 		line-height: 2.25,
 		letter-spacing: inherit,
 		text-transform: none,
-		fs_min: calc(16 / 2),
-		fs_max: calc(16 * 2),
+		fs_min: calc(16 / $title-multiplier),
+		fs_max: calc(16 * $title-multiplier),
 		scale: (
 			map.get($breakpoints, tablet, stripped): 0.9,
 			map.get($breakpoints, mobile, stripped): 0.85,
@@ -122,29 +124,29 @@ $text-presets: (
 		size: 14,
 		weight: map.get($font-weight, regular),
 		line-height: 1.2,
-		fs_min: calc(14 / 2),
-		fs_max: calc(14 * 2),
+		fs_min: calc(14 / $text-multiplier),
+		fs_max: calc(14 * $text-multiplier),
 	),
 	base: (
 		size: 16,
 		weight: map.get($font-weight, regular),
 		line-height: 1.2,
-		fs_min: calc(16 / 2),
-		fs_max: calc(16 * 2),
+		fs_min: calc(16 / $text-multiplier),
+		fs_max: calc(16 * $text-multiplier),
 	),
 	medium: (
 		size: 20,
 		weight: map.get($font-weight, regular),
 		line-height: 1.2,
-		fs_min: calc(20 / 2),
-		fs_max: calc(20 * 2),
+		fs_min: calc(20 / $text-multiplier),
+		fs_max: calc(20 * $text-multiplier),
 	),
 	large: (
 		size: 24,
 		weight: map.get($font-weight, regular),
 		line-height: 1.2,
-		fs_min: calc(24 / 2),
-		fs_max: calc(24 * 2),
+		fs_min: calc(24 / $text-multiplier),
+		fs_max: calc(24 * $text-multiplier),
 	),
 );
 
