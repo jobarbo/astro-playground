@@ -1,0 +1,18 @@
+@use "../base/base.scss" as *;
+
+.hero {
+	&__container {
+		@include container(
+			(
+				xlarge: 60px to-vw(strip-unit(get-padding("desktop", "base"))),
+				desktop: 60px to-vw(strip-unit(get-padding("desktop", "base"))),
+				tablet: 15px get-padding("tablet", "base"),
+				mobile: 10px get-padding("mobile", "base"),
+			)
+		);
+	}
+
+	&__title {
+		margin-bottom: 1rem;
+	}
+}

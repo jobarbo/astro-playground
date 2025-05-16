@@ -65,12 +65,3 @@
 [aria-hidden="true"] {
 	display: none;
 }
-
-// Interactive element focus styles
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
-	@include focus-outline;
-}
