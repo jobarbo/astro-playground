@@ -1,5 +1,24 @@
 @use "../base/base.scss" as *;
 
-main h1 {
-	color: $environment;
+.hero {
+	&__container {
+		@include container();
+	}
+
+	&__title {
+		margin-bottom: 1rem;
+	}
+
+	&__paragraph {
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+		span {
+			font-size: 1.5rem;
+			font-weight: 700;
+		}
+	}
+
+	&__button {
+		margin-top: 1rem;
+	}
 }

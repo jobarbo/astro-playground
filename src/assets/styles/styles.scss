@@ -1,26 +1,2 @@
 @use "./base/base.scss" as *;
 @use "./layouts/base_layout.scss" as *;
-
-body {
-	background-color: $environment;
-}
-
-main {
-	@include container(
-		(
-			xlarge: to-vw(60) to-vw(strip-unit(get-padding("desktop", "medium"))),
-			desktop: to-vw(60) to-vw(strip-unit(get-padding("desktop", "medium"))),
-			tablet: 40px get-padding("tablet", "base"),
-			mobile: 20px get-padding("mobile", "medium"),
-		)
-	);
-}
-
-h1 {
-	transition: padding 0.3s $easeInOutCubic;
-	animation: fadeIn 1s $easeInOutCubic;
-	@include title(1);
-	@include desktop-only {
-		padding: to-vw(strip-unit(get-padding(desktop, base)));
-	}
-}

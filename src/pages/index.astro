@@ -4,9 +4,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title='Home Page'>
-	<h1>Hello World - Index Page</h1>
-	<p data-paragraph></p>
-	<a href='/about' class='button'>About Us</a>
+	<section class='hero'>
+		<div class='hero__container'>
+			<h1 class='hero__title'>Hello World - Index Page</h1>
+			<p class='hero__paragraph'>
+				Random word: <span data-random-number class='hero__random-number'></span>
+			</p>
+			<a href='/about' class='hero__button button'>About Us</a>
+		</div>
+	</section>
 </BaseLayout>
 
 <script>

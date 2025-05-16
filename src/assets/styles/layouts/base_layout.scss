@@ -1,6 +1,6 @@
-$blue: #e4f5ff;
+@use "../base/base.scss" as *;
 
 main {
-	padding: 2rem;
-	background-color: $blue;
+	min-height: 100vh;
+	width: 100vw;
 }

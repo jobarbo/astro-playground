@@ -1,4 +1,5 @@
 ---
+import "../assets/styles/components/navigation.scss";
 import Link from "./Link.astro";
 const {navigation} = Astro.props;
 
@@ -11,10 +12,3 @@ interface NavItem {
 <nav>
 	{navigation.map((item: NavItem) => <Link href={item.href}>{item.text}</Link>)}
 </nav>
-
-<style>
-	nav {
-		display: flex;
-		gap: 1rem;
-	}
-</style>

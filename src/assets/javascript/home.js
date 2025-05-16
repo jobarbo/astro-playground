@@ -1,6 +1,6 @@
 // generate a random word in the data-paragraph element
 export function initParagraph() {
-	const paragraph = document.querySelector("[data-paragraph]");
+	const paragraph = document.querySelector("[data-random-number]");
 	if (paragraph) {
 		paragraph.textContent = generateRandomWord();
 	}

@@ -1,0 +1,16 @@
+@use "../base/base.scss" as *;
+nav {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+	background-color: $pearl;
+	@include container(
+		(
+			xlarge: to-vw(20) to-vw(strip-unit(get-padding("desktop", "base"))),
+			desktop: to-vw(20) to-vw(strip-unit(get-padding("desktop", "base"))),
+			tablet: 15px get-padding("tablet", "base"),
+			mobile: 10px get-padding("mobile", "base"),
+		)
+	);
+}
